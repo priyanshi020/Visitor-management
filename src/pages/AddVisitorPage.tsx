@@ -5,6 +5,13 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
@@ -72,11 +79,22 @@ export default function AddVisitorPage() {
   };
 
   return (
-    <Box sx={{ maxWidth: 520, mx: 'auto' }}>
-      <Typography variant="h5" component="h1" sx={{ mb: 3 }}>
-        Add Visitor
-      </Typography>
-      <Paper sx={{ p: 3 }}>
+    <Box sx={{ maxWidth: 560, mx: 'auto' }}>
+      <Stack direction="row" alignItems="center" spacing={1.5} sx={{ mb: 3 }}>
+        <IconButton onClick={() => navigate('/visitors')} sx={{ bgcolor: 'grey.100' }}>
+          <ArrowBackIcon fontSize="small" />
+        </IconButton>
+        <Box>
+          <Typography variant="h5" component="h1" sx={{ fontWeight: 800 }}>
+            Add Visitor
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Register a new visitor for approval.
+          </Typography>
+        </Box>
+      </Stack>
+
+      <Paper sx={{ p: { xs: 3, sm: 4 } }}>
         <Box component="form" onSubmit={handleSubmit} noValidate>
           <TextField
             label="Name"
@@ -86,6 +104,13 @@ export default function AddVisitorPage() {
             onChange={handleChange('name')}
             error={!!errors.name}
             helperText={errors.name}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonOutlineIcon fontSize="small" color="action" />
+                </InputAdornment>
+              ),
+            }}
           />
           <TextField
             label="Phone"
@@ -95,6 +120,13 @@ export default function AddVisitorPage() {
             onChange={handleChange('phone')}
             error={!!errors.phone}
             helperText={errors.phone}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PhoneOutlinedIcon fontSize="small" color="action" />
+                </InputAdornment>
+              ),
+            }}
           />
           <TextField
             label="Unit Number"
@@ -104,6 +136,13 @@ export default function AddVisitorPage() {
             onChange={handleChange('unit')}
             error={!!errors.unit}
             helperText={errors.unit}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <ApartmentIcon fontSize="small" color="action" />
+                </InputAdornment>
+              ),
+            }}
           />
           <TextField
             label="Visit Date"
@@ -115,17 +154,25 @@ export default function AddVisitorPage() {
             onChange={handleChange('visitDate')}
             error={!!errors.visitDate}
             helperText={errors.visitDate}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EventOutlinedIcon fontSize="small" color="action" />
+                </InputAdornment>
+              ),
+            }}
           />
           <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
             <Button
               type="submit"
               variant="contained"
+              size="large"
               disabled={submitting}
               startIcon={submitting ? <CircularProgress size={18} color="inherit" /> : undefined}
             >
               Submit
             </Button>
-            <Button variant="outlined" onClick={() => navigate('/visitors')} disabled={submitting}>
+            <Button variant="outlined" size="large" onClick={() => navigate('/visitors')} disabled={submitting}>
               Cancel
             </Button>
           </Stack>
