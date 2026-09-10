@@ -128,11 +128,24 @@ Coverage includes:
 - `localStorage` is used both for the auth token/user and the mock visitor dataset, simulating persistence across reloads without a real database.
 - MUI v6 was used (rather than a v7/beta release) for a stable, well-documented API surface.
 
-## Screenshots
+## Screenshots / Demo
 
-Run `npm run dev` and visit `http://localhost:5173` to see:
-1. Login page with validation
-2. Visitor list with status chips and row actions
-3. Add Visitor form
+Screenshot/video capture wasn't available in the build environment, so no image assets are checked into the repo. The flow below was manually verified end-to-end (login → approve → add visitor → delete with confirmation) before submission. To capture your own:
+
+```bash
+npm run dev
+```
+
+Then visit `http://localhost:5173` and walk through:
+1. Login page with validation (try submitting empty, then with an invalid email)
+2. Visitor list with status chips and row actions (approve/reject/delete)
+3. Add Visitor form (try an invalid phone/unit/past date to see validation)
 4. Delete confirmation dialog
 5. Toast notifications on approve/reject/delete/add
+
+## Verification Performed
+
+- `npm run build` — TypeScript project build + Vite production build succeed
+- `npm run test` — 25/25 tests passing
+- `npm run lint` — no oxlint errors
+- Manual browser walkthrough of login, approve, add visitor, and delete-with-confirmation flows against the mock API
